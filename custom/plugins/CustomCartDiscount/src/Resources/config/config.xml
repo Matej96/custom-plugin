@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Custom cart discount plugin configuration</title>
+        <input-field type="checkbox">
+            <name>active</name>
+            <label>Active</label>
+        </input-field>
+        <input-field type="single-select">
+            <name>discountType</name>
+            <label>Discount type</label>
+            <options>
+                <option>
+                    <id>lineItem</id>
+                    <name>Discount using line item</name>
+                </option>
+                <option>
+                    <id>auto</id>
+                    <name>Automatic discount</name>
+                </option>
+            </options>
+        </input-field>
+        <input-field type="int">
+            <name>discountValue</name>
+            <label>Discount Value</label>
+            <placeholder>20</placeholder>
+        </input-field>
+    </card>
+
+</config>

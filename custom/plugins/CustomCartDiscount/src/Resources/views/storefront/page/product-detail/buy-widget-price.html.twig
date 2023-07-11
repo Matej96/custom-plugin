@@ -1,0 +1,48 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-price.html.twig' %}
+
+{% block page_product_detail_price_content %}
+    {% set listPrice = price.listPrice %}
+    {% set isListPrice = listPrice.percentage > 0 %}
+    {% set isRegulationPrice = price.regulationPrice != null %}
+    {% set myConfig = config('CustomCartDiscount.config') %}
+
+    {% if myConfig.active %}
+        <p class="product-detail-price{% if isListPrice %} with-list-price{% endif %}{% if isRegulationPrice %} with-regulation-price{% endif %}">
+            {{ (price.unitPrice * (1 - (myConfig.discountValue / 100)))|currency }}{{ "general.star"|trans|sw_sanitize }}
+        </p>
+    {% else %}
+        <p class="product-detail-price{% if isListPrice %} with-list-price{% endif %}{% if isRegulationPrice %} with-regulation-price{% endif %}">
+            {{ price.unitPrice|currency }}{{ "general.star"|trans|sw_sanitize }}
+        </p>
+    {% endif %}
+    {% if isListPrice %}
+        {% block page_product_detail_was_price %}
+
+            {% block page_product_detail_was_price_badge %}
+                <span class="list-price-badge">&#37;</span>
+            {% endblock %}
+
+            {% set afterListPriceSnippetExists = "listing.afterListPrice"|trans|length > 0 %}
+            {% set beforeListPriceSnippetExists = "listing.beforeListPrice"|trans|length > 0 %}
+
+            {% block page_product_detail_was_price_wrapper %}
+                <span class="product-detail-list-price-wrapper">
+                            {% if beforeListPriceSnippetExists %}{{"listing.beforeListPrice"|trans|trim}}{% endif %}
+
+                            <span{% if not (afterListPriceSnippetExists or beforeListPriceSnippetExists) %} class="list-price-price"{% endif %}>{{ listPrice.price|currency }}{{ "general.star"|trans|sw_sanitize }}</span>
+
+                            {% if afterListPriceSnippetExists %}
+                                {{"listing.afterListPrice"|trans|trim}}
+                            {% endif %}
+
+                            <span class="list-price-percentage">{{ "detail.listPricePercentage"|trans({'%price%': listPrice.percentage })|sw_sanitize }}</span>
+                        </span>
+            {% endblock %}
+        {% endblock %}
+    {% endif %}
+    {% if isRegulationPrice %}
+        <span class="product-detail-list-price-wrapper">
+                    <span class="regulation-price">{{ "general.listPricePreviously"|trans({'%price%': price.regulationPrice.price|currency }) }}{{ "general.star"|trans|sw_sanitize }}</span>
+                </span>
+    {% endif %}
+{% endblock %}
