@@ -1,0 +1,27 @@
+{% block custom_blog_list %}
+    <sw-page class="custom-blog-author-list">
+        {% block custom_blog_smart_bar_actions %}
+            <template #smart-bar-header>
+                    <h2>{{ $tc('custom-blog.authorGeneral.mainMenuItemGeneral') }}</h2>
+            </template>
+            <template #smart-bar-actions>
+                <sw-button variant="primary" :routerLink="{ name: 'custom.blog.authorCreate' }">
+                    {{ $tc('custom-blog.authorList.addButtonText') }}
+                </sw-button>
+            </template>
+        {% endblock %}
+
+        <template #content>
+            {% block custom_blog_author_list_content %}
+                <sw-entity-listing
+                        v-if="authors"
+                        :items="authors"
+                        :repository="repository"
+                        :showSelection="false"
+                        :columns="columns"
+                        detailRoute="custom.blog.authorDetail">
+                </sw-entity-listing>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

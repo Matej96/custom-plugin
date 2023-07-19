@@ -1,0 +1,85 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+    {{ dump(blogs) }}
+    <div class="cms-element-product-listing-wrapper"
+         data-listing-pagination="true"
+         data-listing="true">
+
+
+        <div class="cms-element-product-listing">
+            {% block sas_element_blog_listing_row %}
+                <div class="cms-news-full-listing-row js-listing-wrapper">
+                    {% block sas_element_blog_listing_col %}
+                        <div class="row">
+                            {% for blog in blogs %}
+                                {% block sas_element_blog_listing_box %}
+                                    <div class="col-12 col-md-4 col-lg-3 my-4">
+                                        {% block sas_blog_card %}
+                                            <article class="card blog-card">
+                                                {% block sas_blog_card_teaser_image %}
+{#                                                    <a href="{{ seoUrl('sas.frontend.blog.detail', {'articleId': article.id}) }}"#}
+                                                    <a href="#">
+{#                                                        {% sw_thumbnails 'blog-image-thumbnails' with {#}
+{#                                                            media: article.media,#}
+{#                                                            sizes: {#}
+{#                                                                'xs': '330px',#}
+{#                                                                'sm': '650px',#}
+{#                                                                'md': '650px',#}
+{#                                                                'lg': '650px',#}
+{#                                                                'xl': '900px',#}
+{#                                                            }#}
+{#                                                        } %}#}
+                                                    </a>
+                                                {% endblock %}
+                                                {% block sas_blog_card_body %}
+                                                    <div class="card-body">
+                                                        <div class="d-flex flex-column">
+                                                            {% block sas_blog_card_title %}
+                                                                <h2 class="card-title mt-0">
+                                                                    {% block sas_blog_card_title_link %}
+{#                                                                        <a href="{{ seoUrl('sas.frontend.blog.detail', { articleId: article.id }) }}"#}
+                                                                        <a href="#"
+                                                                           class="text-decoration-none">
+                                                                            {{ blog.title }}
+                                                                        </a>
+                                                                    {% endblock %}
+
+                                                                </h2>
+                                                            {% endblock %}
+                                                            {% block blog_body %}
+                                                                {{ blog.description|slice(0,50) }}
+                                                            {% endblock %}
+                                                        </div>
+                                                    </div>
+                                                {% endblock %}
+
+                                                {% block sas_blog_card_footer %}
+                                                    <div class="card-footer text-muted">
+                                                        {{ dump(blog.author.media) }}
+                                                        {% block sas_blog_card_footer_author %}
+                                                            {% sw_thumbnails 'my-thumbnails' with {
+                                                                media: blog.author.media,
+                                                                sizes: {
+                                                                    'xs': '80px',
+                                                                    'default': '200px'
+                                                                }
+                                                            } %}
+                                                            <p class="blog-author-display-name">{{ blog.author.firstName }}<br>
+{#                                                                <small class="text-muted">{{ blog.author.blogs|length }}</small>#}
+                                                            </p>
+                                                        {% endblock %}
+                                                    </div>
+                                                {% endblock %}
+                                            </article>
+                                        {% endblock %}
+                                    </div>
+                                {% endblock %}
+                            {% endfor %}
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

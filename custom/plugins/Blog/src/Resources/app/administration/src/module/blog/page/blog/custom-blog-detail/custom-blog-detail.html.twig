@@ -1,0 +1,74 @@
+{% block custom_blog_detail %}
+    <sw-page class="custom-blog-detail">
+        <template #smart-bar-actions>
+            <sw-button variant="primary" :routerLink="{ name: 'custom.blog.index' }">
+                {{ $tc('custom-blog.detail.cancelButtonText') }}
+            </sw-button>
+
+            <sw-button-process
+                    :isLoading="isLoading"
+                    :processSuccess="processSuccess"
+                    variant="primary"
+{#                    @process-finish="saveFinish"#}
+                    @click="onClickSave">
+                {{ $tc('custom-blog.detail.saveButtonText') }}
+            </sw-button-process>
+        </template>
+
+        <template #content>
+            <sw-card-view>
+                <sw-card v-if="blog" :isLoading="isLoading">
+                    <sw-field
+                            v-model="blog.title" :label="$tc('custom-blog.detail.titleLabel')"
+                    ></sw-field>
+
+                    <sw-entity-single-select
+{#                            class="sas-blog-author-base-form__salutation-select"#}
+                            entity="custom_author"
+                            :label="$tc('custom-blog.detail.authorLabel')"
+{#                            :placeholder="$tc('custom-author.detail.author.placeholder')"#}
+{#                            :error="blogAuthorIdError"#}
+                            labelProperty="asfrewv"
+                            required
+                            v-model ="blog.authorId">
+                        <template #selection-label-property="{item}">
+                            <span>{{ item.firstName }} {{ item.lastName }} <i>({{ item.email }})</i></span>
+                        </template>
+                        <template #result-label-property="{item}">
+                            <span>{{ item.firstName }} {{ item.lastName }} <i>({{ item.email }})</i></span>
+                        </template>
+
+                    </sw-entity-single-select>
+
+                    <sw-text-editor
+                            v-model="blog.description" type="textarea" :label="$tc('custom-blog.detail.descriptionLabel')"
+                    ></sw-text-editor>
+
+                    <sw-media-compact-upload-v2
+                            variant="regular"
+                            :label="$tc('custom-blog.detail.teaserImageLabel')"
+                            :source="mediaItem"
+                            :uploadTag="blog.id"
+                            :defaultFolder="blog.getEntityName()"
+                            :allowMultiSelect="false"
+                            :fileAccept="fileAccept"
+                            @media-upload-remove-image="onRemoveMediaItem"
+                            @selection-change="setMedia">
+                    </sw-media-compact-upload-v2>
+
+                    <sw-media-compact-upload-v2
+                            variant="regular"
+                            :label="$tc('custom-blog.detail.imageLabel')"
+                            :source="secondMediaItem"
+                            :uploadTag="blog.id"
+                            :defaultFolder="blog.getEntityName()"
+                            :allowMultiSelect="false"
+                            :fileAccept="fileAccept"
+                            @media-upload-remove-image="onRemoveSecondMediaItem"
+                            @selection-change="setSecondMedia">
+                    </sw-media-compact-upload-v2>
+                </sw-card>
+            </sw-card-view>
+        </template>
+    </sw-page>
+{% endblock %}

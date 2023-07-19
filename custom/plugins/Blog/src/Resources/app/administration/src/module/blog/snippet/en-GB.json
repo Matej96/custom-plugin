@@ -1,0 +1,43 @@
+{
+  "custom-blog": {
+    "general": {
+      "mainMenuItemGeneral": "Blogs",
+      "descriptionTextModule": "Manage blogs here."
+    },
+    "list": {
+      "addButtonText": "Add article",
+      "columnTitle": "Title",
+      "columnAuthor": "Author"
+    },
+    "detail": {
+      "titleLabel": "Name",
+      "authorLabel": "Author",
+      "descriptionLabel": "Description",
+      "cancelButtonText": "Cancel",
+      "saveButtonText": "Save",
+      "errorTitle": "Error saving the bundle",
+      "teaserImageLabel": "Teaser image",
+      "imageLabel": "Image"
+    },
+
+    "authorGeneral": {
+      "mainMenuItemGeneral": "Authors",
+      "descriptionTextModule": "Manage authors here."
+    },
+    "authorList": {
+      "listAuthors": "List authors",
+      "addButtonText": "Add author",
+      "columnFirstName": "First name",
+      "columnLastName": "Last name",
+      "columnEmail": "Email"
+    },
+    "authorDetail": {
+      "firstNameLabel": "First name",
+      "lastNameLabel": "Last name",
+      "emailLabel": "Email",
+      "imageLabel": "Image",
+      "cancelButtonText": "Cancel",
+      "saveButtonText": "Save"
+    }
+  }
+}

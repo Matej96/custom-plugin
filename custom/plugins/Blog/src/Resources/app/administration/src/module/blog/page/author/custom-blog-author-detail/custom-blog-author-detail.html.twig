@@ -1,0 +1,52 @@
+{% block custom_blog_author_detail %}
+    <sw-page class="custom-blog-author-detail">
+        <template #smart-bar-header>
+            <h2>{{ $tc('custom-blog.authorGeneral.mainMenuItemGeneral') }}</h2>
+        </template>
+        <template #smart-bar-actions>
+            <sw-button variant="primary" :routerLink="{ name: 'custom.blog.authorIndex' }">
+                {{ $tc('custom-blog.authorDetail.cancelButtonText') }}
+            </sw-button>
+
+            <sw-button-process
+                    :isLoading="isLoading"
+                    :processSuccess="processSuccess"
+                    variant="primary"
+                    {#                    @process-finish="saveFinish"#}
+                    @click="onClickSave">
+                {{ $tc('custom-blog.authorDetail.saveButtonText') }}
+            </sw-button-process>
+        </template>
+
+        <template #content>
+            <sw-card-view>
+                <sw-card v-if="author" :isLoading="isLoading">
+                    <sw-field
+                            v-model="author.firstName" :label="$tc('custom-blog.authorDetail.firstNameLabel')"
+                    ></sw-field>
+
+                    <sw-field
+                            v-model="author.lastName" :label="$tc('custom-blog.authorDetail.lastNameLabel')"
+                    ></sw-field>
+
+                    <sw-field
+                            v-model="author.email" :label="$tc('custom-blog.authorDetail.emailLabel')"
+                    ></sw-field
+>
+
+                    <sw-media-compact-upload-v2
+                            variant="regular"
+                            :label="$tc('custom-blog.authorDetail.imageLabel')"
+                            :source="mediaItem"
+                            :uploadTag="author.id"
+                            :defaultFolder="author.getEntityName()"
+                            :allowMultiSelect="false"
+                            :fileAccept="fileAccept"
+                            @media-upload-remove-image="onRemoveMediaItem"
+                            @selection-change="setMedia">
+                    </sw-media-compact-upload-v2>
+                </sw-card>
+            </sw-card-view>
+        </template>
+    </sw-page>
+{% endblock %}
