@@ -1,0 +1,1 @@
+# OhDear health check plugin for Shopware 6
